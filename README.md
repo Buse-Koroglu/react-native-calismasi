@@ -16,6 +16,18 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
+   For Clerk authentication, use a development build instead of Expo Go:
+
+   ```bash
+   npm run android:dev
+   # or
+   npm run ios:dev
+   # then
+   npm run dev
+   ```
+
+   If you already have a dev client installed, `npm run dev` will start Metro in dev-client mode.
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
