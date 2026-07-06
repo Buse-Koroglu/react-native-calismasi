@@ -22,15 +22,15 @@ declare global {
     status?: string;
     startDate?: string;
     price: number;
-    currency?: string;
+    currency: string;
     billing: string;
     renewalDate?: string;
     color?: string;
   }
 
   interface SubscriptionCardProps extends Omit<Subscription, "id"> {
-    expanded: boolean;
-    onPress: () => void;
+    expanded?: boolean;
+    onPress?: () => void;
     onCancelPress?: () => void;
     isCancelling?: boolean;
   }
@@ -40,7 +40,7 @@ declare global {
     icon: ImageSourcePropType;
     name: string;
     price: number;
-    currency?: string;
+    currency: string;
     daysLeft: number;
   }
 
