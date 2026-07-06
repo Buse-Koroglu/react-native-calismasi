@@ -51,7 +51,9 @@ const SubscriptionCard = ({
             <Text numberOfLines={1} ellipsizeMode="tail" className="sub-meta">
               {category?.trim() ||
                 plan?.trim() ||
-                (renewalDate ? formatSubscriptionDateTime(renewalDate) : "")}
+                (renewalDate
+                  ? formatSubscriptionDateTime(renewalDate)
+                  : "Not Provided")}
             </Text>
           </View>
         </View>
@@ -73,7 +75,7 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {paymentMethod?.trim() || ""}
+                  {paymentMethod?.trim() || "Not Provided"}
                 </Text>
               </View>
             </View>
@@ -86,7 +88,7 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {category?.trim() || plan?.trim() || ""}
+                  {category?.trim() || plan?.trim() || "Not Provided"}
                 </Text>
               </View>
             </View>
@@ -99,7 +101,9 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {startedDate ? formatSubscriptionDateTime(startedDate) : ""}
+                  {startedDate
+                    ? formatSubscriptionDateTime(startedDate)
+                    : "Not Provided"}
                 </Text>
               </View>
             </View>
@@ -112,7 +116,9 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {renewalDate ? formatSubscriptionDateTime(renewalDate) : ""}
+                  {renewalDate
+                    ? formatSubscriptionDateTime(renewalDate)
+                    : "Not Provided"}
                 </Text>
               </View>
             </View>
@@ -125,7 +131,7 @@ const SubscriptionCard = ({
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
-                  {status?.trim() || ""}
+                  {status?.trim() || "Not Provided"}
                 </Text>
               </View>
             </View>
