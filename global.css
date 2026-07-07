@@ -424,4 +424,12 @@
   .category-chip-text-active {
     @apply text-accent;
   }
+
+  .search-input {
+    @apply rounded-2xl border border-border bg-card px-4 py-3 text-base font-sans-medium text-primary;
+  }
+
+  .search-empty {
+    @apply mt-8 text-center text-sm font-sans-medium text-muted-foreground;
+  }
 }
