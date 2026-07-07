@@ -1,6 +1,7 @@
 import { useAuth } from "@clerk/expo";
 import { useSignIn } from "@clerk/expo/legacy";
 import { Link, Redirect, useRouter } from "expo-router";
+import { usePostHog } from "posthog-react-native";
 import { useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -17,6 +18,7 @@ import { authErrorMessage, validateEmail, validatePassword } from "@/lib/auth";
 
 const SignIn = () => {
   const router = useRouter();
+  const posthog = usePostHog();
   const { isSignedIn } = useAuth();
   const { signIn, setActive, isLoaded } = useSignIn();
   const [emailAddress, setEmailAddress] = useState("");
@@ -59,6 +61,12 @@ const SignIn = () => {
 
       if (attempt.status === "complete") {
         await setActive?.({ session: attempt.createdSessionId });
+
+        posthog.capture("Signed In", {
+          method: "password",
+          email: emailAddress.trim().toLowerCase(),
+        });
+
         router.replace("/(tabs)");
         return;
       }

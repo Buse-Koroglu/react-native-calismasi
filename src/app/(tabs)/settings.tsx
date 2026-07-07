@@ -1,12 +1,16 @@
-import { useClerk } from "@clerk/expo";
+// src/app/(tabs)/settings.tsx
+import { useClerk, useUser } from "@clerk/expo";
 import { useRouter } from "expo-router";
+import { usePostHog } from "posthog-react-native";
 import { useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
 const settings = () => {
   const router = useRouter();
+  const posthog = usePostHog();
   const { signOut } = useClerk();
+  const { user } = useUser();
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -15,7 +19,14 @@ const settings = () => {
     setErrorMessage(null);
 
     try {
+      const email = user?.primaryEmailAddress?.emailAddress;
+
       await signOut();
+
+      posthog.capture("Signed Out", {
+        ...(email ? { email } : {}),
+      });
+
       router.replace("/(auth)/sign-in");
     } catch {
       setErrorMessage("Çıkış yapılamadı. Lütfen tekrar deneyin.");
