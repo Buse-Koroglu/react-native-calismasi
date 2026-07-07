@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import dayjs from "dayjs";
+import { usePostHog } from "posthog-react-native";
 import { useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -48,6 +49,7 @@ const CreateSubscriptionModal = ({
   onClose,
   onCreate,
 }: CreateSubscriptionModalProps) => {
+  const posthog = usePostHog();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [frequency, setFrequency] = useState<Frequency>("Monthly");
@@ -101,6 +103,14 @@ const CreateSubscriptionModal = ({
     };
 
     onCreate(newSubscription);
+
+    posthog.capture("Subscription Created", {
+      name: newSubscription.name,
+      category: newSubscription.category ?? "Unknown",
+      price: newSubscription.price,
+      frequency: newSubscription.billing,
+    });
+
     resetForm();
     onClose();
   };
